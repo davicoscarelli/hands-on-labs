@@ -7,11 +7,7 @@ var camera, scene, renderer;
 var cameraControls, effectController;
 var arm, forearm, body, handLeft, handRight;
 var workspace;
-// var gridX = true;
-// var gridY = false;
-// var gridZ = false;
-// var axes = true;
-// var ground = true;
+
 var clock = new THREE.Clock();
 
 
@@ -199,13 +195,7 @@ function init() {
 
 function setupGui() {
   effectController = {
-    // newGridX: gridX,
-    // newGridY: gridY,
-    // newGridZ: gridZ,
-    // newGround: ground,
-    // newAxes: axes,
-
-    // UNCOMMENT FOLLOWING LINE TO SET DEFAULT VALUE OF CONTROLS FOR BODY:
+    
     by: 0.0,
 
     uy: 70.0,
@@ -219,20 +209,16 @@ function setupGui() {
   };
 
   var gui = new GUI();
-  // var h = gui.addFolder("Grid display");
-  // h.add(effectController, "newGridX").name("Show XZ grid");
-  // h.add(effectController, "newGridY").name("Show YZ grid");
-  // h.add(effectController, "newGridZ").name("Show XY grid");
-  // h.add(effectController, "newGround").name("Show ground");
-  // h.add(effectController, "newAxes").name("Show axes");
-  let h = gui.addFolder("Arm angles manual control");
-  // h.add(effectController, "by", -180.0, 180.0, 0.025).name("Body y");
+ 
+  let h = gui.addFolder("Manual control");
   h.add(effectController, "uy", -180.0, 180.0, 0.025).name("Upper arm y");
   h.add(effectController, "uz", -45.0, 45.0, 0.025).name("Upper arm z");
   h.add(effectController, "fy", -180.0, 180.0, 0.025).name("Forearm y");
   h.add(effectController, "fz", -120.0, 120.0, 0.025).name("Forearm z");
   h.add(effectController, "hz", -45.0, 45.0, 0.025).name("Hand z");
 	h.add(effectController, "htz", 2.0, 17.0, 0.025).name("Hand spread");
+  h.open();
+
   animate();
 }
 
@@ -245,24 +231,6 @@ function render() {
   var delta = clock.getDelta();
   cameraControls.update(delta);
 
-  // if (
-  //   effectController.newGridX !== gridX ||
-  //   effectController.newGridY !== gridY ||
-  //   effectController.newGridZ !== gridZ ||
-  //   effectController.newGround !== ground ||
-  //   effectController.newAxes !== axes
-  // ) {
-  // gridX = effectController.newGridX;
-  // gridY = effectController.newGridY;
-  // gridZ = effectController.newGridZ;
-  // ground = effectController.newGround;
-  // axes = effectController.newAxes;
-
-  // fillScene();
-  // drawHelpers();
-  // }
-
-  // UNCOMMENT FOLLOWING LINES TO ENABLE CONTROLS FOR BODY:
 
   body.rotation.y = (effectController.by * Math.PI) / 180; // yaw
 
@@ -285,7 +253,6 @@ function blockcontrols() {
   
 
   Blockly.defineBlocksWithJsonArray([
-    // Block for colour picker.
     {
       "type": "change_body_y",
       "lastDummyAlign0": "CENTRE",
@@ -488,8 +455,49 @@ function blockcontrols() {
       }
     ]
   }
+
+  const Theme = Blockly.Theme.defineTheme('dark', {
+    'base': Blockly.Themes.Classic,
+    'componentStyles': {
+      'workspaceBackgroundColour': '#303030',
+      'toolboxBackgroundColour': '#1e1e1e',
+      'toolboxForegroundColour': '#fff',
+      'flyoutBackgroundColour': '#252526',
+      'flyoutForegroundColour': '#ccc',
+      'flyoutOpacity': 1,
+      'scrollbarColour': '#797979',
+      'insertionMarkerColour': '#fff',
+      'insertionMarkerOpacity': 0.3,
+      'scrollbarOpacity': 0.4,
+      'cursorColour': '#d0d0d0',
+      'blackBackground': '#333',
+    },
+  });
   
-  workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
+  workspace = Blockly.inject('blocklyDiv', {
+    theme: Theme,
+    toolbox: toolbox,
+    grid: {
+      spacing: 25,
+      length: 3,
+      colour: '#ccc',
+      snap: true,
+    },
+  });
+
+  var startBlocks = {
+      "blocks":{
+        "languageVersion":0,
+        "blocks":[
+          {
+            "type":"start",
+          }
+        ]
+      }
+    }
+  Blockly.serialization.workspaces.load(startBlocks, workspace);
+
+
 
   Blockly.JavaScript['start'] = (block) => {
     var code =`console.log("start");`;
@@ -540,10 +548,7 @@ function blockcontrols() {
   //   animate();
   // }
 
-
   // workspace.addChangeListener((updateCode));
-
-
   
 }
 
@@ -555,30 +560,28 @@ blockcontrols()
 setupGui();
 animate();
 
-var button = document.createElement("Button");
-  button.innerHTML = `<a  class="float">
-                        <i class="fa fa-play my-float"></i>
-                        </a>`;
-  
-  button.onclick = function(){runCode()};  
+var button = document.createElement("div");
+button.innerHTML = `<a  class="float">
+                      <i class="fa fa-play my-float"></i>
+                      </a>`;
 
-  document.body.appendChild(button);
+button.onclick = function(){runCode()};  
 
-  function runCode() {
-    // Generate JavaScript code and run it.
-    console.log("YAYY")
+document.body.appendChild(button);
+
+function runCode() {
+
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+  try {
+    console.log(code)
+    eval(code);
     
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-
-    try {
-      console.log(code)
-      eval(code);
-      
-      
-    } catch (e) {
-      console.log("AAA",e);
-    }
+    
+  } catch (e) {
+    console.log("Error",e);
   }
+}
 
 
 
