@@ -14,12 +14,13 @@ var clock = new THREE.Clock();
 function fillScene() {
   scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x808080, 2000, 4000);
+  scene.background = new THREE.Color( 0x1C1F2B );
 
   // LIGHTS
   var ambientLight = new THREE.AmbientLight(0x222222);
-  var light = new THREE.DirectionalLight(0xffffff, 1.0);
+  var light = new THREE.DirectionalLight(0xffffff, 0.5);
   light.position.set(200, 400, 500);
-  var light2 = new THREE.DirectionalLight(0xffffff, 1.0);
+  var light2 = new THREE.DirectionalLight(0xffffff, 0.5);
   light2.position.set(-500, 250, -200);
   scene.add(ambientLight);
   scene.add(light);
@@ -459,8 +460,8 @@ function blockcontrols() {
   const Theme = Blockly.Theme.defineTheme('dark', {
     'base': Blockly.Themes.Classic,
     'componentStyles': {
-      'workspaceBackgroundColour': '#303030',
-      'toolboxBackgroundColour': '#1e1e1e',
+      'workspaceBackgroundColour': '#30354a',
+      'toolboxBackgroundColour': '#000',
       'toolboxForegroundColour': '#fff',
       'flyoutBackgroundColour': '#252526',
       'flyoutForegroundColour': '#ccc',
@@ -561,8 +562,8 @@ setupGui();
 animate();
 
 var button = document.createElement("div");
-button.innerHTML = `<a  class="float">
-                      <i class="fa fa-play my-float"></i>
+button.innerHTML = `<a  class="float-play">
+                      <i class="fa fa-play inner-float"></i>
                       </a>`;
 
 button.onclick = function(){runCode()};  

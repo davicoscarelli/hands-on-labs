@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://www.robotarm.net/login -->
+<html class="no-js" lang="" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hands-on Labs - Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.robotarm.net/static/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="./login_files/bootstrap-5.0.0-alpha-2.min.css">
+    <link rel="stylesheet" href="./login_files/LineIcons.2.0.css">
+    <link rel="stylesheet" href="./login_files/tiny-slider.css">
+    <link rel="stylesheet" href="./login_files/glightbox.min.css">
+    <link rel="stylesheet" href="./login_files/animate.css">
+    <link rel="stylesheet" href="./login_files/lindy-uikit.css">
+
+    
+  	
+  
+  </head>
+  <body bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMS45LjEwIiwic2NvcmUiOjEwOTEwfV0=" data-new-gr-c-s-check-loaded="14.1107.0" data-gr-ext-installed="">
+    
+
+    <!-- ========================= preloader start ========================= -->
+    <div class="preloader" bis_skin_checked="1" style="opacity: 0; display: none;">
+      <div class="loader" bis_skin_checked="1">
+        <div class="spinner" bis_skin_checked="1">
+          <div class="spinner-container" bis_skin_checked="1">
+            <div class="spinner-rotator" bis_skin_checked="1">
+              <div class="spinner-left" bis_skin_checked="1">
+                <div class="spinner-circle" bis_skin_checked="1"></div>
+              </div>
+              <div class="spinner-right" bis_skin_checked="1">
+                <div class="spinner-circle" bis_skin_checked="1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ========================= preloader end ========================= -->
+
+    <!-- ========================= login-style-1 start ========================= -->
+    <section class="login-section login-style-1 img-bg">
+      <div class="container" bis_skin_checked="1">
+        <div class="row" bis_skin_checked="1">
+          <div class="col-xl-5 col-lg-6" bis_skin_checked="1">
+            <div class="login-content-wrapper" bis_skin_checked="1">
+              <div class="section-title mb-40" bis_skin_checked="1">
+                  
+                     
+                  
+                <h3 class="mb-20 mt-150">Log In</h3>
+                <p>Looking forward to entering the lab? You are at the right place. <br class="d-none d-md-block"> Enter your credentials to login</p>
+              </div>
+
+              <form action="{{ url_for('login') }}" method="post" class="login-form">
+                <div class="single-input" bis_skin_checked="1">
+                  <label for="login-email">Email</label>
+                  
+                        <input id="email" name="email" required="" type="text" value="">
+                    
+
+                </div>
+                <div class="single-input" bis_skin_checked="1">
+                  <label for="login-password">Password</label>
+                  
+                        <input id="password" name="password" required="" type="password" value="">
+                    
+
+                </div>
+
+                <div class="msg">{{ msg }}</div>
+                
+                <div class="signup-button mb-25" bis_skin_checked="1">
+                  <input class="button button-lg radius-10 btn-block" id="submit" name="submit" type="submit" value="Login">
+                </div>
+                <p class="mb-25">Don't have an account? <a href="/simulator/signup/index.html">Sign up</a> </p>
+              </form>
+
+            </div>
+          </div>
+          <div class="col-xl-7 col-lg-6 align-self-end" bis_skin_checked="1">
+            <div class="image text-lg-right d-none d-lg-block mt-100 mb-100" bis_skin_checked="1">
+              <img src="./login_files/login-img.svg" alt="" class="w-90">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= login-style-1 end ========================= -->
+
+    <!-- ========================= footer style-2 footer-dark start ========================= -->
+    <footer class="footer footer-style-2 footer-dark">
+      <div class="container" bis_skin_checked="1">
+        <div class="widget-wrapper" bis_skin_checked="1">
+          <div class="row" bis_skin_checked="1">
+            <div class="" bis_skin_checked="1">
+              <div class="footer-widget" bis_skin_checked="1">
+                <div class="logo" bis_skin_checked="1">
+                  <a href="https://www.robotarm.net/"> <img src="./login_files/logo-2.svg" alt=""> </a>
+                </div>
+                <p class="desc">Remotely Control A Robotic Arm To Execute Your Commands In Real Time Using Internet Of Things Technology.</p>
+                
+              </div>
+            </div>
+            
+            
+            
+          </div>
+        </div>
+        
+      </div>
+    </footer>
+
+    <!-- ========================= footer style-2 footer-dark end ========================= -->
+
+    <!-- ========================= JS here ========================= -->
+    <script src="./login_files/bootstrap.5.0.0.alpha-2-min.js"></script>
+    <script src="./login_files/tiny-slider.js"></script>
+    <script src="./login_files/count-up.min.js"></script>
+    <script src="./login_files/imagesloaded.min.js"></script>
+    <script src="./login_files/isotope.min.js"></script>
+    <script src="./login_files/glightbox.min.js"></script>
+    <script src="./login_files/wow.min.js"></script>
+    <script src="./login_files/main.js"></script>
+  
+</body></html>
