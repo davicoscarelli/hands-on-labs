@@ -11,11 +11,12 @@
   
 
 </head>
-<body style="margin: 0px; height: 100vh; overflow: hidden">
+<body style="margin: 0px; height: 100vh; overflow: hidden; background-color: #1d1f2b;">
   <script type="module" src="{{ url_for('static', filename='simulator/script.js') }}"></script>
 
   <div id="blocklyDiv" style="height: 50vh; width: 100vw;"></div>
 
+  
 
 
   
@@ -23,8 +24,17 @@
     <i class="fa fa-home inner-float"></i>
     </a>
 
+    <div id="view-live" controls style="width: 100vw; height: 50vh;  justify-content: center; display: none;">
+      <img class="live-icon" src="{{ url_for('static', filename='livestream/live.png') }}" alt="Livestream">
+      <video id="videoplayer" height="100%">  
+        <source src="{{ url_for('static', filename='livestream/arm.mp4') }}" type="video/mp4">  
+        Your browser does not support the html video tag.  
+      </video>  
+  
+    </div>
   <script src="https://unpkg.com/blockly/blockly.min.js"></script>
   <script src="https://unpkg.com/blockly/javascript_compressed"></script>
+
 
 
 

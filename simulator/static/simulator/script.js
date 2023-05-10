@@ -572,14 +572,61 @@ blockcontrols()
 setupGui();
 animate();
 
+
+
 var button = document.createElement("div");
 button.innerHTML = `<a  class="float-play">
-                      <i class="fa fa-play inner-float"></i>
+                      <i id="icon_togle2" class="fa fa-play inner-float"></i>
                       </a>`;
 
-button.onclick = function(){runCode()};  
+var button2 = document.createElement("div");
+button2.innerHTML = `<a  class="float-switch_view">
+                      <i id="icon_togle" class="fa fa-eye inner-float"></i>
+                      </a>`;
+
 
 document.body.appendChild(button);
+document.body.appendChild(button2);
+
+
+let viewlive = document.getElementById("view-live"); 
+let icon = document.getElementById("icon_togle")
+let icon2 = document.getElementById("icon_togle2")
+
+
+button.onclick = function(){
+  if(viewlive.style.display === "none"){
+    runCode()
+  }else{
+    playPause()
+    if(icon2.classList.contains('fa-play')){
+      icon2.classList.remove('fa-play');
+      icon2.classList.add('fa-pause');
+    }else{
+      icon2.classList.add('fa-play');
+      icon2.classList.remove('fa-pause');
+    }
+  }
+  
+};  
+
+
+button2.onclick = function(){
+  if(viewlive.style.display === "none"){
+    viewlive.style.display = "flex"
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  }else{
+    viewlive.style.display = "none"
+    icon.classList.add('fa-eye');
+    icon.classList.remove('fa-eye-slash');
+    icon2.classList.add('fa-play');
+    icon2.classList.remove('fa-pause');
+    videoplayer.pause(); 
+    videoplayer.currentTime = 0
+    
+  }
+};  
 
 function runCode() {
 
@@ -595,6 +642,21 @@ function runCode() {
     console.log("Error",e);
   }
 }
+
+
+let videoplayer = document.getElementById("videoplayer"); 
+    
+function playPause()
+{ 
+    if (videoplayer.paused){
+      videoplayer.play(); 
+    } else {
+      videoplayer.pause(); 
+    }
+
+} 
+
+
 
 
 
