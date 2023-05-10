@@ -1,7 +1,10 @@
 # Hands-On Labs Take-Home Assignment
 
 ## Web Application:
-
+```bash
+#make sure you run the following commands in the folder Simulator
+$ cd simulator
+```
 ### Run Virtual Environment
 
 Virtual environment is a key component in ensuring that the application is configured in the right environment
@@ -53,5 +56,5 @@ Install dependencies in virtual environment:
 Start the server by running:
 
     $ export FLASK_ENV=development
-    $ export FLASK_APP=web
+    $ export FLASK_APP=main
     $ python3 -m flask run
