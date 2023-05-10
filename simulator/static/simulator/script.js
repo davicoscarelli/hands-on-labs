@@ -282,8 +282,8 @@ function blockcontrols() {
           "type": "field_number",
           "name": "input",
           "value": -15,
-          "min": -180,
-          "max": 180
+          "min": -45,
+          "max": 45
         }
       ],
       "previousStatement": null,
@@ -320,8 +320,8 @@ function blockcontrols() {
           "type": "field_number",
           "name": "input",
           "value": 60,
-          "min": -180,
-          "max": 180
+          "min": -120,
+          "max": 120
         }
       ],
       "previousStatement": null,
@@ -339,8 +339,8 @@ function blockcontrols() {
           "type": "field_number",
           "name": "input",
           "value": 30,
-          "min": -180,
-          "max": 180
+          "min": -45,
+          "max": 45
         }
       ],
       "previousStatement": null,
@@ -502,7 +502,6 @@ function blockcontrols() {
 
   Blockly.JavaScript['start'] = (block) => {
     var code =`console.log("start");`;
-    gui.updateDisplay()
     return code;
   };
 
@@ -510,7 +509,7 @@ function blockcontrols() {
     var angle_input = block.getFieldValue('input');
     var code =`
             effectController.uy = ${angle_input}; 
-            effectController.uy.updateDisplay()`;
+            `;
     return code;
   };
 
@@ -518,8 +517,7 @@ function blockcontrols() {
     var angle_input = block.getFieldValue('input');
     var code =`
               effectController.uz = ${angle_input};
-              effectController.uz.updateDisplay()`;
-    gui.updateDisplay()
+              `;
     return code;
   };
 
@@ -527,8 +525,7 @@ function blockcontrols() {
     var angle_input = block.getFieldValue('input');
     var code =`
               effectController.fy = ${angle_input};
-              effectController.fy.updateDisplay()`;
-    gui.updateDisplay()
+              `;
     return code;
   };
 
@@ -536,8 +533,7 @@ function blockcontrols() {
     var angle_input = block.getFieldValue('input');
     var code =`
               effectController.fz = ${angle_input};
-              effectController.fz.updateDisplay()`;
-    gui.updateDisplay()
+              `;
     return code;
   };
 
@@ -545,8 +541,7 @@ function blockcontrols() {
     var angle_input = block.getFieldValue('input');
     var code =`
               effectController.hz = ${angle_input};
-              effectController.hz.updateDisplay()`;
-    gui.updateDisplay()
+              `;
     return code;
   };
 
@@ -554,8 +549,7 @@ function blockcontrols() {
     var angle_input = block.getFieldValue('input');
     var code =`
               effectController.htz = ${angle_input};
-              effectController.htz.updateDisplay()`;
-    gui.updateDisplay()
+              `;
     return code;
   };
 
