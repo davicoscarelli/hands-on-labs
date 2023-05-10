@@ -16,6 +16,31 @@
 
   <div id="blocklyDiv" style="height: 50vh; width: 100vw;"></div>
 
+  <div class="code-preview-container" ng-hide="collapsed">
+    <sg-nav-pills>
+      <ul class="nav nav-pills" role="tablist">
+        <li ng-show="component.code.html" role="presentation" class="active">
+            <a data-toggle="pill" href="#tab-html">HTML</a>
+        </li>
+        <li ng-show="component.code.css" role="presentation" class="">
+            <a data-toggle="pill" href="#tab-css">CSS</a>
+        </li>
+      </ul>
+    </sg-nav-pills>
+    <div class="tab-content">
+      <div id="tab-html" class="tab-pane fade in active">
+        <pre>
+          asd1
+        </pre>
+      </div>
+      <div id="tab-css" class="tab-pane fade">
+        <pre>
+          asd2
+        </pre>
+      </div>
+    </div>
+  </div>
+
   
   <a href="/dashboard" class="float-exit">
     <i class="fa fa-home inner-float"></i>

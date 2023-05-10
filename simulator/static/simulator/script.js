@@ -7,7 +7,7 @@ var camera, scene, renderer;
 var cameraControls, effectController;
 var arm, forearm, body, handLeft, handRight;
 var workspace;
-
+var gui;
 var clock = new THREE.Clock();
 
 
@@ -209,7 +209,7 @@ function setupGui() {
 		htz: 12.0
   };
 
-  var gui = new GUI();
+  gui = new GUI();
  
   let h = gui.addFolder("Manual control");
   h.add(effectController, "uy", -180.0, 180.0, 0.025).name("Upper arm y");
@@ -502,43 +502,60 @@ function blockcontrols() {
 
   Blockly.JavaScript['start'] = (block) => {
     var code =`console.log("start");`;
+    gui.updateDisplay()
     return code;
   };
 
   Blockly.JavaScript['change_body_y'] = (block) => {
     var angle_input = block.getFieldValue('input');
     var code =`
-            effectController.uy = ${angle_input}; `;
+            effectController.uy = ${angle_input}; 
+            effectController.uy.updateDisplay()`;
     return code;
   };
 
   Blockly.JavaScript['change_body_z'] = (block) => {
     var angle_input = block.getFieldValue('input');
-    var code =`effectController.uz = ${angle_input};`;
+    var code =`
+              effectController.uz = ${angle_input};
+              effectController.uz.updateDisplay()`;
+    gui.updateDisplay()
     return code;
   };
 
   Blockly.JavaScript['change_forearm_y'] = (block) => {
     var angle_input = block.getFieldValue('input');
-    var code =`effectController.fy = ${angle_input};`;
+    var code =`
+              effectController.fy = ${angle_input};
+              effectController.fy.updateDisplay()`;
+    gui.updateDisplay()
     return code;
   };
 
   Blockly.JavaScript['change_forearm_z'] = (block) => {
     var angle_input = block.getFieldValue('input');
-    var code =`effectController.fz = ${angle_input};`;
+    var code =`
+              effectController.fz = ${angle_input};
+              effectController.fz.updateDisplay()`;
+    gui.updateDisplay()
     return code;
   };
 
   Blockly.JavaScript['change_hand_z'] = (block) => {
     var angle_input = block.getFieldValue('input');
-    var code =`effectController.hz = ${angle_input};`;
+    var code =`
+              effectController.hz = ${angle_input};
+              effectController.hz.updateDisplay()`;
+    gui.updateDisplay()
     return code;
   };
 
   Blockly.JavaScript['change_hand_spread'] = (block) => {
     var angle_input = block.getFieldValue('input');
-    var code =`effectController.htz = ${angle_input};`;
+    var code =`
+              effectController.htz = ${angle_input};
+              effectController.htz.updateDisplay()`;
+    gui.updateDisplay()
     return code;
   };
 
@@ -577,6 +594,7 @@ function runCode() {
   try {
     console.log(code)
     eval(code);
+    gui.updateDisplay()
     
     
   } catch (e) {

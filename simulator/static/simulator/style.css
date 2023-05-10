@@ -29,3 +29,162 @@
 	margin-top:22px;
 }
 
+
+
+.code-preview-container .nav {
+	padding: 0 15px;
+	background: #222;
+	border-bottom: 1px solid #343434;
+  }
+  .code-preview-container .nav li {
+	-ms-transition: all 300ms ease-in-out;
+	-moz-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
+	-khtml-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+  }
+  .code-preview-container .nav li[ng-show="component.code.html"] a {
+	color: sandybrown;
+  }
+  .code-preview-container .nav li[ng-show="component.code.html"].active, .code-preview-container .nav li[ng-show="component.code.html"]:active, .code-preview-container .nav li[ng-show="component.code.html"]:hover, .code-preview-container .nav li[ng-show="component.code.html"]:focus a {
+	opacity: 1;
+	-ms-box-shadow: 0 1px 0 sandybrown;
+	-moz-box-shadow: 0 1px 0 sandybrown;
+	-o-box-shadow: 0 1px 0 sandybrown;
+	-webkit-box-shadow: 0 1px 0 sandybrown;
+	-khtml-box-shadow: 0 1px 0 sandybrown;
+	box-shadow: 0 1px 0 sandybrown;
+  }
+  .code-preview-container .nav li[ng-show="component.code.html"].active a {
+	opacity: 1;
+	background: rgba(244, 164, 96, 0.1);
+	-ms-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 sandybrown, 0 6px 12px rgba(244, 164, 96, 0.65);
+	-moz-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 sandybrown, 0 6px 12px rgba(244, 164, 96, 0.65);
+	-o-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 sandybrown, 0 6px 12px rgba(244, 164, 96, 0.65);
+	-webkit-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 sandybrown, 0 6px 12px rgba(244, 164, 96, 0.65);
+	-khtml-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 sandybrown, 0 6px 12px rgba(244, 164, 96, 0.65);
+	box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 sandybrown, 0 6px 12px rgba(244, 164, 96, 0.65);
+  }
+  .code-preview-container .nav li[ng-show="component.code.css"] a {
+	color: tan;
+  }
+  .code-preview-container .nav li[ng-show="component.code.css"].active, .code-preview-container .nav li[ng-show="component.code.css"]:active, .code-preview-container .nav li[ng-show="component.code.css"]:hover, .code-preview-container .nav li[ng-show="component.code.css"]:focus a {
+	opacity: 1;
+	-ms-box-shadow: 0 1px 0 tan;
+	-moz-box-shadow: 0 1px 0 tan;
+	-o-box-shadow: 0 1px 0 tan;
+	-webkit-box-shadow: 0 1px 0 tan;
+	-khtml-box-shadow: 0 1px 0 tan;
+	box-shadow: 0 1px 0 tan;
+  }
+  .code-preview-container .nav li[ng-show="component.code.css"].active a {
+	opacity: 1;
+	background: rgba(210, 180, 140, 0.1);
+	-ms-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 tan, 0 6px 12px rgba(210, 180, 140, 0.65);
+	-moz-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 tan, 0 6px 12px rgba(210, 180, 140, 0.65);
+	-o-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 tan, 0 6px 12px rgba(210, 180, 140, 0.65);
+	-webkit-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 tan, 0 6px 12px rgba(210, 180, 140, 0.65);
+	-khtml-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 tan, 0 6px 12px rgba(210, 180, 140, 0.65);
+	box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 tan, 0 6px 12px rgba(210, 180, 140, 0.65);
+  }
+  .code-preview-container .nav li[ng-show="component.code.js"] a {
+	color: lightblue;
+  }
+  .code-preview-container .nav li[ng-show="component.code.js"].active, .code-preview-container .nav li[ng-show="component.code.js"]:active, .code-preview-container .nav li[ng-show="component.code.js"]:hover, .code-preview-container .nav li[ng-show="component.code.js"]:focus a {
+	opacity: 1;
+	-ms-box-shadow: 0 1px 0 lightblue;
+	-moz-box-shadow: 0 1px 0 lightblue;
+	-o-box-shadow: 0 1px 0 lightblue;
+	-webkit-box-shadow: 0 1px 0 lightblue;
+	-khtml-box-shadow: 0 1px 0 lightblue;
+	box-shadow: 0 1px 0 lightblue;
+  }
+  .code-preview-container .nav li[ng-show="component.code.js"].active a {
+	opacity: 1;
+	background: rgba(173, 216, 230, 0.1);
+	-ms-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 lightblue, 0 6px 12px rgba(173, 216, 230, 0.65);
+	-moz-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 lightblue, 0 6px 12px rgba(173, 216, 230, 0.65);
+	-o-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 lightblue, 0 6px 12px rgba(173, 216, 230, 0.65);
+	-webkit-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 lightblue, 0 6px 12px rgba(173, 216, 230, 0.65);
+	-khtml-box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 lightblue, 0 6px 12px rgba(173, 216, 230, 0.65);
+	box-shadow: 10px 0px 0px #222, -10px 0px 0px #222, 0 1px 0 lightblue, 0 6px 12px rgba(173, 216, 230, 0.65);
+  }
+  .code-preview-container .nav li a {
+	opacity: 0.65;
+	-ms-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+	-webkit-border-radius: 0;
+	-khtml-border-radius: 0;
+	border-radius: 0;
+	background: transparent;
+	-ms-transition: all 300ms ease-in-out;
+	-moz-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
+	-khtml-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+  }
+  .code-preview-container .nav li.active, .code-preview-container .nav li:active, .code-preview-container .nav li:hover, .code-preview-container .nav li:focus, .code-preview-container .nav li.active, .code-preview-container .nav li:active, .code-preview-container .nav li:hover, .code-preview-container .nav li:focus a {
+	-ms-transition: all 150ms ease-in-out;
+	-moz-transition: all 150ms ease-in-out;
+	-o-transition: all 150ms ease-in-out;
+	-webkit-transition: all 150ms ease-in-out;
+	-khtml-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
+  }
+  .code-preview-container .nav li.active a {
+	opacity: 1;
+	-ms-transition: all 150ms ease-in-out;
+	-moz-transition: all 150ms ease-in-out;
+	-o-transition: all 150ms ease-in-out;
+	-webkit-transition: all 150ms ease-in-out;
+	-khtml-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
+  }
+  .code-preview-container .nav li.ng-hide {
+	pointer-events: none !important;
+  }
+  .code-preview-container .nav li.ng-hide a {
+	color: #777;
+	opacity: 0.5;
+  }
+  .code-preview-container .tab-content {
+	height: 400px;
+	max-height: 400px;
+	overflow: auto;
+	background: #222;
+	-ms-box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+	-o-box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+	-khtml-box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+  }
+  .code-preview-container .tab-content pre {
+	padding: 15px;
+	border: none;
+	background: transparent;
+	-ms-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+	-webkit-border-radius: 0;
+	-khtml-border-radius: 0;
+	border-radius: 0;
+  }
+  .code-preview-container .tab-content code {
+	line-height: 20px;
+  }
+  .code-preview-container .tab-content code[ng-bind="component.code.html"] {
+	color: sandybrown;
+	background: rgba(244, 164, 96, 0.1);
+  }
+  .code-preview-container .tab-content code[ng-bind="component.code.css"] {
+	color: tan;
+	background: rgba(210, 180, 140, 0.1);
+  }
+  .code-preview-container .tab-content code[ng-bind="component.code.js"] {
+	color: lightblue;
+	background: rgba(173, 216, 230, 0.1);
+  }

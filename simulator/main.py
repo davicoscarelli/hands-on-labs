@@ -42,24 +42,19 @@ def register():
         user = User.query.filter_by(username=username).first()
         if user is not None:
             error = 'This username already exists! please choose a new username'
-            print("ERROR:", error)
             return render_template('/signup/index.html', error_register=error)
         if len(password) < 8:
             error = 'Your password should be at least 8 symbols long. Please, try again.'
-            print("ERROR:", error)
             return render_template('/signup/index.html', error_register=error)
         
 
         # store user information, with password hashed
         new_user = User(username=username, password=generate_password_hash(password, method='sha256'), email = email, courses = courses)
-        print("NEWWW USEERR")
         db.session.add(new_user)
         db.session.commit()
         register_success_message = 'Registered successful. Please log in'
-        print("REGISTEREDDD")
         return render_template('/login/index.html', message=register_success_message)
     elif request.method == 'GET':
-        print("REGISTER PAGEE")
         return render_template('/signup/index.html')
     
 
@@ -69,19 +64,15 @@ def login():
         email = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
-        print("AAAAA", user)
         # check if the user exists
         # Take the password, hash it, and compare it with the hashed password in the database
         if not user or not check_password_hash(user.password, password):
             error = 'The password or the username you entered is not correct!'
-            print("ERROR:", error)
             return render_template('/login/index.html', message=error)
         login_user(user)
-        print("LOGIINNNN")
         return redirect('/dashboard')
         # return render_template('main.html')
     elif request.method == 'GET':
-        print("LOGIINNNN PAGEEE")
         return render_template('/login/index.html')
 
 
