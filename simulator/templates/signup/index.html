@@ -10,18 +10,18 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="./signup_files/bootstrap-5.0.0-alpha-2.min.css">
-    <link rel="stylesheet" href="./signup_files/LineIcons.2.0.css">
-    <link rel="stylesheet" href="./signup_files/tiny-slider.css">
-    <link rel="stylesheet" href="./signup_files/glightbox.min.css">
-    <link rel="stylesheet" href="./signup_files/animate.css">
-    <link rel="stylesheet" href="./signup_files/lindy-uikit.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup/bootstrap-5.0.0-alpha-2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup/LineIcons.2.0.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup/tiny-slider.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup/glightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup/lindy-uikit.css') }}">
 
     
   	
   
   </head>
-  <body bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMS45LjEwIiwic2NvcmUiOjEwOTEwfV0=" data-new-gr-c-s-check-loaded="14.1107.0" data-gr-ext-installed="">
+  <body data-new-gr-c-s-check-loaded="14.1107.0" data-gr-ext-installed="">
     
 
     <!-- ========================= preloader start ========================= -->
@@ -52,15 +52,15 @@
                 <h3 class="mb-20 mt-100">Sign Up</h3>
                 <p>Do not have the keys to the lab yet? what are you waiting for, Sign-up now to create your account!</p>
               </div>
+              
               <div class="image" bis_skin_checked="1">
-                <img src="./signup_files/signup-img.svg" alt="" class="w-100">
+                <img src="{{ url_for('static', filename='signup/signup-img.svg') }}" alt="" class="w-100">
               </div>
             </div>
           </div>
           <div class="col-lg-6" bis_skin_checked="1">
             <div class="signup-form-wrapper" bis_skin_checked="1">
-              <form method="post" action="https://www.robotarm.net/signup" class="signup-form">
-                  <input id="csrf_token" name="csrf_token" type="hidden" value="ImNmYWU4NWNiNzE1Y2MwNGY3MDZlYjc0ZWVjNWM1MTAwZWMzYTQ1Mzki.ZFpeag.nhND8rtA-5ijwZXImSl_z5q8EuE">
+              <form method="post" action="/register" class="signup-form">
                 <div class="single-input" bis_skin_checked="1">
                   <label for="signup-name">Name</label>
                     
@@ -92,7 +92,10 @@
                 <div class="signup-button mb-25" bis_skin_checked="1">
                     <input class="button button-lg radius-10 btn-block" id="submit" name="submit" type="submit" value="Sign Up">
                 </div>
-                <p>Already you have an account? <a href="/simulator/login/index.html">Log In</a> </p>
+                {% if error_register %}
+                <p style="color: red; margin-top: 10px; margin-bottom: 20px;">{{ error_register }}</p>
+                {% endif %}
+                <p>Already you have an account? <a href="/login">Log In</a> </p>
               </form>
             </div>
           </div>
@@ -108,7 +111,7 @@
             <div class="" bis_skin_checked="1">
               <div class="footer-widget" bis_skin_checked="1">
                 <div class="logo" bis_skin_checked="1">
-                  <a href="https://www.robotarm.net/signup#0"> <img src="./signup_files/logo-2.svg" alt=""> </a>
+                  <a href="https://www.robotarm.net/signup#0"> <img src="{{ url_for('static', filename='signup/logo-2.svg') }}" alt=""> </a>
                 </div>
                 <p class="desc">Remotely Control A Robotic Arm To Execute Your Commands In Real Time Using Internet Of Things Technology.</p>
                 
@@ -125,13 +128,13 @@
 
     <!-- ========================= footer style-2 footer-dark end ========================= -->
     <!-- ========================= JS here ========================= -->
-   <script src="./signup_files/bootstrap.5.0.0.alpha-2-min.js"></script>
-    <script src="./signup_files/tiny-slider.js"></script>
-    <script src="./signup_files/count-up.min.js"></script>
-    <script src="./signup_files/imagesloaded.min.js"></script>
-    <script src="./signup_files/isotope.min.js"></script>
-    <script src="./signup_files/glightbox.min.js"></script>
-    <script src="./signup_files/wow.min.js"></script>
-    <script src="./signup_files/main.js"></script>
+   <script src="{{ url_for('static', filename='signup/bootstrap.5.0.0.alpha-2-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/tiny-slider.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/count-up.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/imagesloaded.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/isotope.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/glightbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='signup/main.js') }}"></script>
   
 </body></html>

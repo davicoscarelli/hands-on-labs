@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Hands-on-labs - Simulator</title>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='simulator/style.css') }}">
   <link rel="shortcut icon" type="image/x-icon" href="https://www.robotarm.net/static/img/favicon.png">
 
 
@@ -12,12 +12,12 @@
 
 </head>
 <body style="margin: 0px; height: 100vh; overflow: hidden">
-  <script type="module" src="./script.js"></script>
+  <script type="module" src="{{ url_for('static', filename='simulator/script.js') }}"></script>
 
   <div id="blocklyDiv" style="height: 50vh; width: 100vw;"></div>
 
   
-  <a href="/simulator/dashboard/index.html" class="float-exit">
+  <a href="/dashboard" class="float-exit">
     <i class="fa fa-home inner-float"></i>
     </a>
 

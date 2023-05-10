@@ -6,7 +6,8 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://www.robotarm.net/static/img/favicon.png">
 
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css'><link rel="stylesheet" href="./style.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard/style.css') }}">
 
 </head>
 <body>
@@ -15,7 +16,7 @@
   <div class="col" id="sidebar">
     <nav>
       <div class="header"><a  class="navbar-brand" href="">
-        <img style="width: 100%"  src="./logo.svg" alt="Logo">
+        <img style="width: 100%"  src="{{ url_for('static', filename='dashboard/logo.svg') }}" alt="Logo">
       </a>
         <button id="menu"><i class="fa fa-bars"></i></button>
       </div>
@@ -25,9 +26,13 @@
           <button class="btn-search"><i class="fa fa-lg fa-search"></i></button>
         </li> -->
         <!-- <li class="nav-text">Dashboard</li> -->
+        <li><div class="label"><span>Welcome {{current_user.username}}!</span></li>
+        <li style="margin-bottom: 50px;">
+          <div  class="divider"></div>
+        </li>
         
-        <li><a class="active" href="#">Courses</a></li>
-        <li><a href="/simulator/login/index.html">LogOut</a></li>
+        <li ><a class="active" href="#">Courses</a></li>
+        <li><a href="/logout">LogOut</a></li>
         <!-- <li><a href="#">Fluid layout</a></li>
         <li><a href="#">Icon nav</a></li>
         <li class="nav-text">More</li>
@@ -62,7 +67,7 @@
             </span>
           </div>
           
-          <a href="/simulator/simulator/index.html"><button  class="btn">Continue</button></a>
+          <a href="/simulator"><button  class="btn">Continue</button></a>
         </div>
       </div>
     </div>
@@ -76,7 +81,8 @@
 <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/726875/fontawesome.js'></script>
 <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/726875/solid.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js'></script>
-<script src='https://codepen.io/milesmanners/pen/XgYOPy.js'></script><script  src="./script.js"></script>
+<script src='https://codepen.io/milesmanners/pen/XgYOPy.js'></script>
+<script  src="{{ url_for('static', filename='dashboard/script.js') }}"></script>
 
 </body>
 </html>

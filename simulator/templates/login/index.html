@@ -10,12 +10,12 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="./login_files/bootstrap-5.0.0-alpha-2.min.css">
-    <link rel="stylesheet" href="./login_files/LineIcons.2.0.css">
-    <link rel="stylesheet" href="./login_files/tiny-slider.css">
-    <link rel="stylesheet" href="./login_files/glightbox.min.css">
-    <link rel="stylesheet" href="./login_files/animate.css">
-    <link rel="stylesheet" href="./login_files/lindy-uikit.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/bootstrap-5.0.0-alpha-2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/LineIcons.2.0.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/tiny-slider.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/glightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/lindy-uikit.css') }}">
 
     
   	
@@ -73,19 +73,23 @@
 
                 </div>
 
-                <div class="msg">{{ msg }}</div>
+                  
                 
                 <div class="signup-button mb-25" bis_skin_checked="1">
                   <input class="button button-lg radius-10 btn-block" id="submit" name="submit" type="submit" value="Login">
                 </div>
-                <p class="mb-25">Don't have an account? <a href="/simulator/signup/index.html">Sign up</a> </p>
+                
+                  {% if message %}
+                    <p style="color: red; margin-top: 10px; margin-bottom: 20px;">{{ message }}</p>
+                  {% endif %}
+                <p class="mb-25">Don't have an account? <a href="/register">Sign up</a> </p>
               </form>
 
             </div>
           </div>
           <div class="col-xl-7 col-lg-6 align-self-end" bis_skin_checked="1">
             <div class="image text-lg-right d-none d-lg-block mt-100 mb-100" bis_skin_checked="1">
-              <img src="./login_files/login-img.svg" alt="" class="w-90">
+              <img src="{{ url_for('static', filename='login/login-img.svg') }}" alt="" class="w-90">
             </div>
           </div>
         </div>
@@ -101,7 +105,7 @@
             <div class="" bis_skin_checked="1">
               <div class="footer-widget" bis_skin_checked="1">
                 <div class="logo" bis_skin_checked="1">
-                  <a href="https://www.robotarm.net/"> <img src="./login_files/logo-2.svg" alt=""> </a>
+                  <a href="https://www.robotarm.net/"> <img src="{{ url_for('static', filename='login/logo-2.svg') }}" alt=""> </a>
                 </div>
                 <p class="desc">Remotely Control A Robotic Arm To Execute Your Commands In Real Time Using Internet Of Things Technology.</p>
                 
@@ -119,13 +123,13 @@
     <!-- ========================= footer style-2 footer-dark end ========================= -->
 
     <!-- ========================= JS here ========================= -->
-    <script src="./login_files/bootstrap.5.0.0.alpha-2-min.js"></script>
-    <script src="./login_files/tiny-slider.js"></script>
-    <script src="./login_files/count-up.min.js"></script>
-    <script src="./login_files/imagesloaded.min.js"></script>
-    <script src="./login_files/isotope.min.js"></script>
-    <script src="./login_files/glightbox.min.js"></script>
-    <script src="./login_files/wow.min.js"></script>
-    <script src="./login_files/main.js"></script>
+    <script src="{{ url_for('static', filename='login/bootstrap.5.0.0.alpha-2-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/tiny-slider.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/count-up.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/imagesloaded.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/isotope.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/glightbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='login/main.js') }}"></script>
   
 </body></html>

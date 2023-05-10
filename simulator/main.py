@@ -1,27 +1,113 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
-import re
+import os
+from flask import Flask, render_template, redirect, request, send_file, g, session #Main Flask
+from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user #To create the Login
+from flask_sqlalchemy import SQLAlchemy #SQL Alchemy to create the database
+from werkzeug.security import generate_password_hash, check_password_hash
 
+files_path = os.path.dirname(os.path.abspath(__file__)) #Setting the path of the main directory
+
+database_main_file = "sqlite:///{}".format(os.path.join(files_path, "primary.db")) #The path of the main database
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = database_main_file
+app.secret_key = "vwebvji2biubweuvb92bv82b3voibw"
 
-# Change this to your secret key (can be anything, it's for extra protection)
-app.secret_key = 'd5fb8c4fa8bd46638dadc4e751e0d68d'
+login = LoginManager()
+login.init_app(app)
+login.login_view = 'login'
 
-# Enter your database connection details below
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'davi2304'
-app.config['MYSQL_DB'] = 'handsonlabsdb'
+db = SQLAlchemy(app)
 
-# Intialize MySQL
-mysql = MySQL(app)
+class User(UserMixin, db.Model): # A table to store users data
+    __tablename__ = 'User'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(200))
+    password = db.Column(db.String(200))
+    email = db.Column(db.String(100))
+    courses = db.Column(db.String(255))
+    def __repr__(self):
+        return "<Username: {}>".format(self.username)
+    
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        courses = "[]"
+        user = User.query.filter_by(username=username).first()
+        if user is not None:
+            error = 'This username already exists! please choose a new username'
+            print("ERROR:", error)
+            return render_template('/signup/index.html', error_register=error)
+        if len(password) < 8:
+            error = 'Your password should be at least 8 symbols long. Please, try again.'
+            print("ERROR:", error)
+            return render_template('/signup/index.html', error_register=error)
+        
 
-# http://localhost:5000/pythonlogin/ - the following will be our login page, which will use both GET and POST requests
-@app.route('/login/', methods=['GET', 'POST'])
+        # store user information, with password hashed
+        new_user = User(username=username, password=generate_password_hash(password, method='sha256'), email = email, courses = courses)
+        print("NEWWW USEERR")
+        db.session.add(new_user)
+        db.session.commit()
+        register_success_message = 'Registered successful. Please log in'
+        print("REGISTEREDDD")
+        return render_template('/login/index.html', message=register_success_message)
+    elif request.method == 'GET':
+        print("REGISTER PAGEE")
+        return render_template('/signup/index.html')
+    
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    # Output message if something goes wrong...
-    msg = 'Wrong account details...'
-    return render_template('/login/index.html', msg='')
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = User.query.filter_by(email=email).first()
+        print("AAAAA", user)
+        # check if the user exists
+        # Take the password, hash it, and compare it with the hashed password in the database
+        if not user or not check_password_hash(user.password, password):
+            error = 'The password or the username you entered is not correct!'
+            print("ERROR:", error)
+            return render_template('/login/index.html', message=error)
+        login_user(user)
+        print("LOGIINNNN")
+        return redirect('/dashboard')
+        # return render_template('main.html')
+    elif request.method == 'GET':
+        print("LOGIINNNN PAGEEE")
+        return render_template('/login/index.html')
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
+
+
+
+@app.route('/dashboard', methods=["GET", "POST"])
+@login_required
+def waitroom():
+    g.user = current_user
+    return render_template("/dashboard/index.html", myuser=current_user)
+
+
+@app.route('/simulator', methods=["GET", "POST"])
+@login_required
+def simulator():
+    g.user = current_user
+    return render_template("/simulator/index.html", myuser=current_user)
+
+
+
+if __name__ == "__main__":
+    app.run(debug = True)
+    TEMPLATES_AUTO_RELOAD = True
