@@ -1,12 +1,12 @@
 import os
-from flask import Flask, render_template, redirect, request, send_file, g, session #Main Flask
-from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user #To create the Login
-from flask_sqlalchemy import SQLAlchemy #SQL Alchemy to create the database
+from flask import Flask, render_template, redirect, request, send_file, g, session 
+from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user 
+from flask_sqlalchemy import SQLAlchemy 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-files_path = os.path.dirname(os.path.abspath(__file__)) #Setting the path of the main directory
+files_path = os.path.dirname(os.path.abspath(__file__)) 
 
-database_main_file = "sqlite:///{}".format(os.path.join(files_path, "primary.db")) #The path of the main database
+database_main_file = "sqlite:///{}".format(os.path.join(files_path, "primary.db")) 
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_main_file
@@ -18,7 +18,7 @@ login.login_view = 'login'
 
 db = SQLAlchemy(app)
 
-class User(UserMixin, db.Model): # A table to store users data
+class User(UserMixin, db.Model): 
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200))
@@ -39,21 +39,18 @@ def register():
         password = request.form['password']
         email = request.form['email']
         courses = "[]"
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(email=email).first()
         if user is not None:
-            error = 'This username already exists! please choose a new username'
+            error = 'This email is already registered! please choose a new email or Login.'
             return render_template('/signup/index.html', error_register=error)
         if len(password) < 8:
             error = 'Your password should be at least 8 symbols long. Please, try again.'
             return render_template('/signup/index.html', error_register=error)
         
-
-        # store user information, with password hashed
         new_user = User(username=username, password=generate_password_hash(password, method='sha256'), email = email, courses = courses)
         db.session.add(new_user)
         db.session.commit()
-        register_success_message = 'Registered successful. Please log in'
-        return render_template('/login/index.html', message=register_success_message)
+        return render_template('/login/index.html')
     elif request.method == 'GET':
         return render_template('/signup/index.html')
     
@@ -63,15 +60,14 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
-        # check if the user exists
-        # Take the password, hash it, and compare it with the hashed password in the database
+        user = User.query.filter_by(email=email).first()  
+        
         if not user or not check_password_hash(user.password, password):
             error = 'The password or the username you entered is not correct!'
             return render_template('/login/index.html', message=error)
         login_user(user)
         return redirect('/dashboard')
-        # return render_template('main.html')
+        
     elif request.method == 'GET':
         return render_template('/login/index.html')
 
@@ -81,7 +77,6 @@ def login():
 def logout():
     logout_user()
     return redirect('/login')
-
 
 
 @app.route('/dashboard', methods=["GET", "POST"])

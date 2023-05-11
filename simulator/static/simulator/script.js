@@ -2,6 +2,12 @@ import * as THREE from "https://unpkg.com/three@0.119.0/build/three.module.js";
 import { OrbitControls } from "https://unpkg.com/three@0.119.0/examples/jsm/controls/OrbitControls.js";
 import { GUI } from "https://unpkg.com/three@0.119.0/examples/jsm/libs/dat.gui.module.js";
 
+// import {iot} from "@google-cloud/iot"
+
+const cloudRegion = 'us-central1';
+const deviceId = 'robot-arm';
+const projectId = 'adjective-noun-123';
+const registryId = 'registry';
 
 var camera, scene, renderer;
 var cameraControls, effectController;
@@ -382,51 +388,367 @@ function blockcontrols() {
     "kind": "categoryToolbox",
     "contents": [
       {
-        "kind": "category",
-        "name": "Control",
-        "contents": [
+        'kind': 'category',
+        'name': 'Logic',
+        'categorystyle': 'logic_category',
+        'contents': [
           {
-            "kind": "block",
-            "type": "start"
+            'type': 'controls_if',
+            'kind': 'block',
           },
           {
-            "kind": "block",
-            "type": "controls_if"
+            'type': 'logic_compare',
+            'kind': 'block',
+            'fields': {
+              'OP': 'EQ',
+            },
           },
           {
-            "kind": "block",
-            "type": "controls_repeat_ext"
+            'type': 'logic_operation',
+            'kind': 'block',
+            'fields': {
+              'OP': 'AND',
+            },
           },
-        ]
-        
+          {
+            'type': 'logic_negate',
+            'kind': 'block',
+          },
+          {
+            'type': 'logic_boolean',
+            'kind': 'block',
+            'fields': {
+              'BOOL': 'TRUE',
+            },
+          },
+          {
+            'type': 'logic_null',
+            'kind': 'block',
+          },
+          {
+            'type': 'logic_ternary',
+            'kind': 'block',
+          },
+        ],
       },
       {
-        "kind": "category",
-        "name": "Math",
-        "contents": [
+        'kind': 'category',
+        'name': 'Loops',
+        'categorystyle': 'loop_category',
+        'contents': [
           {
-            "kind": "block",
-            "type": "math_number"
+            'type': 'controls_repeat_ext',
+            'kind': 'block',
+            'inputs': {
+              'TIMES': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 10,
+                  },
+                },
+              },
+            },
           },
           {
-            "kind": "block",
-            "type": "math_arithmetic"
+            'type': 'controls_repeat',
+            'kind': 'block',
+            'fields': {
+              'TIMES': 10,
+            },
           },
-        ]
+          {
+            'type': 'controls_whileUntil',
+            'kind': 'block',
+            'fields': {
+              'MODE': 'WHILE',
+            },
+          },
+          {
+            'type': 'controls_for',
+            'kind': 'block',
+            'fields': {
+              'VAR': {
+                'name': 'i',
+              },
+            },
+            'inputs': {
+              'FROM': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+              'TO': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 10,
+                  },
+                },
+              },
+              'BY': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'controls_forEach',
+            'kind': 'block',
+            'fields': {
+              'VAR': {
+                'name': 'j',
+              },
+            },
+          },
+          {
+            'type': 'controls_flow_statements',
+            'kind': 'block',
+            'fields': {
+              'FLOW': 'BREAK',
+            },
+          },
+        ],
       },
       {
-        "kind": "category",
-        "name": "Logic",
-        "contents": [
+        'kind': 'category',
+        'name': 'Math',
+        'categorystyle': 'math_category',
+        'contents': [
           {
-            "kind": "block",
-            "type": "logic_compare"
+            'type': 'math_number',
+            'kind': 'block',
+            'fields': {
+              'NUM': 123,
+            },
           },
-        ]
+          {
+            'type': 'math_arithmetic',
+            'kind': 'block',
+            'fields': {
+              'OP': 'ADD',
+            },
+            'inputs': {
+              'A': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+              'B': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_single',
+            'kind': 'block',
+            'fields': {
+              'OP': 'ROOT',
+            },
+            'inputs': {
+              'NUM': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 9,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_trig',
+            'kind': 'block',
+            'fields': {
+              'OP': 'SIN',
+            },
+            'inputs': {
+              'NUM': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 45,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_constant',
+            'kind': 'block',
+            'fields': {
+              'CONSTANT': 'PI',
+            },
+          },
+          {
+            'type': 'math_number_property',
+            'kind': 'block',
+            'fields': {
+              'PROPERTY': 'EVEN',
+            },
+            'inputs': {
+              'NUMBER_TO_CHECK': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 0,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_round',
+            'kind': 'block',
+            'fields': {
+              'OP': 'ROUND',
+            },
+            'inputs': {
+              'NUM': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 3.1,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_on_list',
+            'kind': 'block',
+            'fields': {
+              'OP': 'SUM',
+            },
+          },
+          {
+            'type': 'math_modulo',
+            'kind': 'block',
+            'inputs': {
+              'DIVIDEND': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 64,
+                  },
+                },
+              },
+              'DIVISOR': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 10,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_constrain',
+            'kind': 'block',
+            'inputs': {
+              'VALUE': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 50,
+                  },
+                },
+              },
+              'LOW': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+              'HIGH': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 100,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_random_int',
+            'kind': 'block',
+            'inputs': {
+              'FROM': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+              'TO': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 100,
+                  },
+                },
+              },
+            },
+          },
+          {
+            'type': 'math_random_float',
+            'kind': 'block',
+          },
+          {
+            'type': 'math_atan2',
+            'kind': 'block',
+            'inputs': {
+              'X': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+              'Y': {
+                'shadow': {
+                  'type': 'math_number',
+                  'fields': {
+                    'NUM': 1,
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+      {
+        'kind': 'category',
+        'name': 'Variables',
+        'custom': 'VARIABLE',
+        'categorystyle': 'variable_category',
+  
       },
       {
         "kind": "category",
         "name": "Robot Arm",
+        'categorystyle': 'math_category',
         "contents": [
           {
             "kind": "block",
@@ -498,6 +820,8 @@ function blockcontrols() {
     }
   Blockly.serialization.workspaces.load(startBlocks, workspace);
 
+  
+
 
 
   Blockly.JavaScript['start'] = (block) => {
@@ -564,6 +888,134 @@ function blockcontrols() {
   
 }
 
+function setup(){
+
+  workspace.scrollCenter()
+
+  var button = document.createElement("div");
+  button.innerHTML = `<a  class="float-play">
+                        <i id="icon_togle2" class="fa fa-play inner-float"></i>
+                        </a>`;
+
+  var button2 = document.createElement("div");
+  button2.innerHTML = `<a  class="float-switch_view">
+                        <i id="icon_togle" class="fa fa-eye inner-float"></i>
+                        </a>`;
+
+
+  document.body.appendChild(button);
+  document.body.appendChild(button2);
+
+
+  let viewlive = document.getElementById("view-live"); 
+  let icon = document.getElementById("icon_togle")
+  let icon2 = document.getElementById("icon_togle2")
+
+
+  button.onclick = function(){
+    if(viewlive.style.display === "none"){
+      runCode()
+    }else{
+      playPause()
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      sendIOTCommand(
+        deviceId,
+        registryId,
+        projectId,
+        cloudRegion,
+        code
+      )
+      if(icon2.classList.contains('fa-play')){
+        icon2.classList.remove('fa-play');
+        icon2.classList.add('fa-pause');
+      }else{
+        icon2.classList.add('fa-play');
+        icon2.classList.remove('fa-pause');
+      }
+    }
+    
+  };  
+
+
+  button2.onclick = function(){
+    if(viewlive.style.display === "none"){
+      viewlive.style.display = "flex"
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    }else{
+      viewlive.style.display = "none"
+      icon.classList.add('fa-eye');
+      icon.classList.remove('fa-eye-slash');
+      icon2.classList.add('fa-play');
+      icon2.classList.remove('fa-pause');
+      videoplayer.pause(); 
+      videoplayer.currentTime = 0
+      
+    }
+  };  
+
+  function runCode() {
+
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+    try {
+      console.log(code)
+      eval(code);
+      gui.updateDisplay()
+      
+      
+    } catch (e) {
+      console.log("Error",e);
+    }
+  }
+
+
+  let videoplayer = document.getElementById("videoplayer"); 
+      
+  function playPause()
+  { 
+      if (videoplayer.paused){
+        videoplayer.play(); 
+      } else {
+        videoplayer.pause(); 
+      }
+
+  } 
+
+  async function sendIOTCommand(
+    deviceId,
+    registryId,
+    projectId,
+    cloudRegion,
+    code
+  ){
+    
+    const iotClient = new iot.v1.DeviceManagerClient({
+      // auth parameters.
+    });
+  
+    async function sendCommand() {
+      const formattedName = iotClient.devicePath(
+        projectId,
+        cloudRegion,
+        registryId,
+        deviceId
+      );
+  
+      const binaryData = Buffer.from(code);
+  
+      const request = {
+        name: formattedName,
+        binaryData: binaryData,
+      };
+  
+      const [response] = await iotClient.sendCommandToDevice(request);
+      console.log('Sent command: ', response);
+    }
+  
+    sendCommand();
+  };
+}
 
 
 init();
@@ -571,90 +1023,10 @@ fillScene();
 blockcontrols()
 setupGui();
 animate();
+setup()
 
 
 
-var button = document.createElement("div");
-button.innerHTML = `<a  class="float-play">
-                      <i id="icon_togle2" class="fa fa-play inner-float"></i>
-                      </a>`;
-
-var button2 = document.createElement("div");
-button2.innerHTML = `<a  class="float-switch_view">
-                      <i id="icon_togle" class="fa fa-eye inner-float"></i>
-                      </a>`;
-
-
-document.body.appendChild(button);
-document.body.appendChild(button2);
-
-
-let viewlive = document.getElementById("view-live"); 
-let icon = document.getElementById("icon_togle")
-let icon2 = document.getElementById("icon_togle2")
-
-
-button.onclick = function(){
-  if(viewlive.style.display === "none"){
-    runCode()
-  }else{
-    playPause()
-    if(icon2.classList.contains('fa-play')){
-      icon2.classList.remove('fa-play');
-      icon2.classList.add('fa-pause');
-    }else{
-      icon2.classList.add('fa-play');
-      icon2.classList.remove('fa-pause');
-    }
-  }
-  
-};  
-
-
-button2.onclick = function(){
-  if(viewlive.style.display === "none"){
-    viewlive.style.display = "flex"
-    icon.classList.remove('fa-eye');
-    icon.classList.add('fa-eye-slash');
-  }else{
-    viewlive.style.display = "none"
-    icon.classList.add('fa-eye');
-    icon.classList.remove('fa-eye-slash');
-    icon2.classList.add('fa-play');
-    icon2.classList.remove('fa-pause');
-    videoplayer.pause(); 
-    videoplayer.currentTime = 0
-    
-  }
-};  
-
-function runCode() {
-
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-
-  try {
-    console.log(code)
-    eval(code);
-    gui.updateDisplay()
-    
-    
-  } catch (e) {
-    console.log("Error",e);
-  }
-}
-
-
-let videoplayer = document.getElementById("videoplayer"); 
-    
-function playPause()
-{ 
-    if (videoplayer.paused){
-      videoplayer.play(); 
-    } else {
-      videoplayer.pause(); 
-    }
-
-} 
 
 
 
