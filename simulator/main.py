@@ -32,6 +32,10 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
+@app.route('/')
+def hello():
+    return redirect("/login")
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'POST':
